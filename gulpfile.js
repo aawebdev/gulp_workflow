@@ -3,9 +3,8 @@
 //////////////////////////
 
 var gulp = require('gulp'),
+	sass = require('gulp-ruby-sass'),
 	sourcemaps = require('gulp-sourcemaps'),
-	sass = require('gulp-sass'),
-	autoprefixer = require('gulp-autoprefixer'),
 	bs = require('browser-sync').create();
 	
 ///////////////////////////
@@ -19,10 +18,8 @@ var output = './assets/css';
 /// Sass Tasks
 //////////////////////////
 gulp.task('sass', function () {
-  return gulp.src(input)
-  	.pipe(sourcemaps.init())
-	.pipe(sass({ style: 'expanded' }))
-	.pipe(sourcemaps.write(output))
+  sass(input, {sourcemap: true, style: 'compact'})
+  .pipe(sourcemaps.write())
     .pipe(gulp.dest(output))
 	bs.reload;
 });
